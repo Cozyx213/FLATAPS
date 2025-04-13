@@ -1,84 +1,144 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<!-- index.html -->
-<!-- index.html -->
-<style>
-    /* Style for the buttons */
-    .past{
-        color: gray;
-    }
-    button {
-        font-size: 1rem;
-        /* Increase the text size */
-        padding: 5px 5px;
-        /* Increase padding for larger size */
-        border: 1px solid #000;
+<!-- Include Tailwind CSS -->
+<link
+  href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+  rel="stylesheet"
+/>
 
+<body class="bg-gradient-to-r from-pink-100 via-pink-200 to-pink-100 min-h-screen flex items-center justify-center p-6">
+  <!-- Card Container -->
+  <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-6">
 
-        color: #000000;
-    }
-
-    /* Style for the "Share to leaderboards" button */
+    <!-- Title -->
+    <h2 class="text-2xl md:text-3xl font-extrabold text-blue-800 text-center mb-4">
+      Guess The Element/Compound
+    </h2>
     
+    <!-- Reset Button -->
+    <button
+      id="resetButton"
+      class="w-full mb-4 py-2 bg-yellow-300 hover:bg-yellow-400 text-gray-800 font-bold rounded-full transition duration-200"
+    >
+      Reset Flashcards
+    </button>
 
-    .leaderboard {
-        display: inline-flex;
-        
-        justify-content: space-between;
-    }
+    <!-- Flashcard Section -->
+    <div class="flashcard flex flex-col items-center">
+      <!-- Action Buttons -->
+      <div class="button-group flex flex-wrap justify-center space-x-2 space-y-2 mb-4">
+        <button
+          id="nextButton"
+          class="px-4 py-2 bg-blue-300 hover:bg-blue-400 text-white font-bold rounded transition duration-200"
+        >
+          Next
+        </button>
+        <button
+          id="shuffleButton"
+          class="px-4 py-2 bg-purple-300 hover:bg-purple-400 text-white font-bold rounded transition duration-200"
+        >
+          Shuffle
+        </button>
+        <button
+          id="toggleDescriptionButton"
+          class="px-4 py-2 bg-green-300 hover:bg-green-400 text-white font-bold rounded transition duration-200"
+        >
+          Show Description
+        </button>
+        <button
+          id="toggleDataButton"
+          class="px-4 py-2 bg-pink-300 hover:bg-pink-400 text-white font-bold rounded transition duration-200"
+        >
+          Elements/Ions/Polyatomic Ions/Acids
+        </button>
+        <button
+          id="acidButton"
+          class="px-4 py-2 bg-red-300 hover:bg-red-400 text-white font-bold rounded transition duration-200"
+        >
+          Acids
+        </button>
+        <button
+          id="showAnswer"
+          class="px-4 py-2 bg-indigo-300 hover:bg-indigo-400 text-white font-bold rounded transition duration-200"
+        >
+          Reveal
+        </button>
+        <button
+          id="swapAnswer"
+          class="px-4 py-2 bg-yellow-300 hover:bg-yellow-400 text-white font-bold rounded transition duration-200"
+        >
+          Swap
+        </button>
+      </div>
 
-    /* Add more styles for other buttons if needed */
-</style>
+      <!-- Symbol Display -->
+      <h2
+        id="flashcard-symbol"
+        class="text-4xl font-extrabold text-gray-800 mb-2"
+      ></h2>
 
-<body>
+      <!-- Description (hidden by default) -->
+      <div class="description hidden text-gray-700 mb-4">
+        <!-- Description content goes here -->
+      </div>
 
-    <h2>Guess The element/compound:</h2>
-    <button id="resetButton">Reset Flashcards</button>
-    <divn id="flashcard-container">
+      <!-- Guess Prompt and Input -->
+      <p class="font-semibold mb-2 text-lg">Guess the Element:</p>
+      <input
+        type="text"
+        id="answer"
+        placeholder="Enter your answer"
+        class="w-full mb-4 px-3 py-2 border border-gray-300 rounded"
+      />
 
-        <div class="flashcard">
+      <!-- Past Guesses -->
+      <div class="past text-gray-500 mb-4">
+        <p></p>
+      </div>
 
-            <button id="nextButton">Next</button>
-            <button id="shuffleButton">Shuffle</button>
-            <button id="toggleDescriptionButton">Show Description</button>
-            <button id="toggleDataButton">Elements/Ions/Polyatomic Ions/Acids</button>
-            <button id="acidButton">Acids</button>
-            <button id="showAnswer">Reveal</button>
-            <button id="swapAnswer">Swap</button>
-            <h2 id="flashcard-symbol" style="font-size: 3.4rem;"></h2>
-            <div class="description" style="display: none">
-                <!-- Description content goes here -->
-            </div>
-            <div class="content">
-                <p>Guess the Element:</p>
+      <!-- Back Content (hidden by default) -->
+      <div class="back hidden mb-4">
+        <p class="text-gray-700"></p>
+      </div>
+    </div>
 
-                <input type="text" id="answer" placeholder="Enter your answer">
+    <!-- Hidden Form (for Leaderboard) -->
+    <form
+      id="leaderboardForm"
+      action="/leaderboards"
+      method="post"
+      class="hidden"
+    >
+      <input type="hidden" id="scoreInput" name="score" value="" />
+      <input type="hidden" id="timeSpentInput" name="total_time_spent" value="" />
+      <input type="hidden" id="nameInput" name="name" value="" />
+    </form>
 
-            </div>
-            <div class="past">
-                <p></p>
-            </div>
-            <div class="back" style="display: none">
-                <p></p>
-            </div>
-            
-        </div>
+    <!-- Score Display -->
+    <p class="mt-4 text-lg font-bold text-blue-800 text-center">
+      Score: <span id="score" class="text-gray-800">0</span>
+    </p>
 
+    <!-- Leaderboard / Sharing Section -->
+    <div class="leaderboard flex justify-between items-center mt-4">
+      <button
+        id="share"
+        class="px-4 py-2 bg-orange-300 hover:bg-orange-400 text-white font-bold rounded-full transition duration-200"
+      >
+        Share to leaderboards
+      </button>
+      <button
+        class="px-4 py-2 bg-blue-300 hover:bg-blue-400 text-white font-bold rounded-full transition duration-200"
+      >
+        <a href="{{ url_for('Enrollees') }}" class="no-underline text-white">
+          Leaderboards
+        </a>
+      </button>
+    </div>
+  </div>
 
-        <form id="leaderboardForm" action="/leaderboards" method="post">
-            <input type="hidden" id="scoreInput" name="score" value="">
-            <input type="hidden" id="timeSpentInput" name="total_time_spent" value="">
-            <input type="hidden" id="nameInput" name="name" value="">
-
-        </form>
-        </div>
-        <p>Score: <span id="score">0</span></p>
-        <div class="leaderbord">
-            <button id="share">Share to leaderboards</button>
-            <button><a href="{{ url_for('Enrollees') }}"><p>Leaderboards</p></a></button>
-        </div>
-
-        <script src="{{ url_for('static', filename='js/flashcard.js') }}"></script>
+  <!-- JavaScript for functionality -->
+  <script src="{{ url_for('static', filename='js/flashcard.js') }}"></script>
 </body>
-{% endblock%}
+{% endblock %}

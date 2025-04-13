@@ -68,7 +68,7 @@ def download_ppt(subject,ppt_filename):
 
 @app.route('/')
 def endix():
-    return render_template("endix.html")
+    return render_template("Chemistry.html")
 @app.route("/Create")
 def Create():
     return render_template('Create.html')

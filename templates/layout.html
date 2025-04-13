@@ -1,74 +1,75 @@
+<!-- layout.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLATAPS</title>
-    <link rel="icon" href="{{ url_for('static',filename='pictures/icon_flashcard-r.png') }}" type="image/x-icon" width="64"height="64">
-    <link rel="stylesheet" href = "/static/css/main.css">
-    <link href="{{ url_for('static',filename='styles/styles.css') }}" rel="stylesheet" type="text/css">
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>FLATAPS</title>
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    href="{{ url_for('static',filename='pictures/icon_flashcard-r.png') }}"
+    type="image/x-icon"
+    width="64"
+    height="64"
+  />
+
+  <!-- Tailwind (CDN or your own build) or your CSS -->
+  <!-- Example: <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" /> -->
+  <link rel="stylesheet" href="/static/css/main.css" />
+  <link
+    href="{{ url_for('static',filename='styles/styles.css') }}"
+    rel="stylesheet"
+    type="text/css"
+  />
 </head>
-<body>
-    <div class="page">
-        <div class="head_container">
-            <div class="branding">
-                <img class="logo" src="{{ url_for('static',filename='pictures/icon_flashcard-r.png') }}" alt="ANHS LOGO"
-                    width="7%">
-                <div class="site-identity">
-                    <p class="site-title">FLATAPS</p>
-                    <p class="site-description"> Flashcards Learning and Test Assessment Platform System</p>
-                    
-                </div>
-            </div>
-            <div class="information flex justify-center space-x-4">
-                <a  href="{{ url_for('endix') }}">
-                    <p>Home</p>
-                </a>
-                <a  href="{{ url_for('Chemistry') }}">
-                    <p>Chemistry</p>
-                </a>
-                <a  href="{{ url_for('Create') }}">
-                    <p>Create</p>
-                </a>
-                <a  href="{{ url_for('resource_download') }}">
-                    <p>Resources</p>
-                </a>
-            </div>
+<body
+  class="bg-gradient-to-tr from-pink-100 via-purple-50 to-yellow-50
+         text-gray-800 min-h-screen flex flex-col"
+>
+  <!-- Page Wrapper -->
+  <div class="page flex-grow flex flex-col">
+
+    <!-- Header / Navigation Container -->
+    <div
+      class="head_container bg-white/80 backdrop-blur-sm shadow-lg
+             px-4 py-2 mb-4"
+    >
+      <div class="branding flex items-center space-x-4 mb-2">
+        <img
+          class="logo w-12 h-auto"
+          src="{{ url_for('static',filename='pictures/icon_flashcard-r.png') }}"
+          alt="ANHS LOGO"
+        />
+        <div class="site-identity">
+          <p class="site-title text-2xl font-extrabold text-blue-800">
+            FLATAPS
+          </p>
+          <p class="site-description text-sm text-gray-600">
+            Flashcards Learning and Test Assessment Platform System
+          </p>
         </div>
-        {% block body %} {% endblock %}
-        <hr>
-        <footer>
-            <div class="footer_container">
-                <div class="branding_footer_whole">
-                    <div class="branding_footer">
-                        <img class="logo" src="{{ url_for('static',filename='pictures/icon_flashcard-r.png') }}"
-                            alt="ANHS LOGO" width="5%" height="10%">
-                        <div class="site-identity_footer">
-                            <p class="site-title_footer">FLATAPS</p>
-                            <p class="site-description_footer">Flashcards Learning and Test Assessment Platform System</p>
-                            
-                        </div>
-                    </div>
-                    <div class="branding_footer_motto">
-                        Dream it. Believe it. Achieve it.
-                    
-                </div>
-                <div class="socials_footer">
-                    <div class="heading">
-                        <div class="quick_email">
-                            <img class="contact_logo" src="{{ url_for('static',filename='pictures/GMAIL_LOGO.png') }}"
-                                alt="gmail_logo" width="1rem">
-                            <p class="contacts">302985argaonhs@gmail.com</p>
-                        </div>
-                    </div>
-                    <a href="https://www.facebook.com/profile.php?id=100063811972895" target="_blank"><img
-                            src="{{ url_for('static',filename='pictures/FB_LOGO.png') }}" alt="fb_logo" width="30vw"
-                            height="30vh"></a>
-                </div>
-            </div>
-        </footer>
+      </div>
+      <div
+        class="information flex justify-center space-x-4 font-medium text-lg"
+      >
+      
+      
+       
+      </div>
     </div>
+
+    <!-- Main Content, Centered Vertically & Horizontally -->
+    <div
+      class="flex items-center justify-center flex-grow px-4 py-6"
+    >
+      {% block body %}
+      {% endblock %}
+    </div>
+  </div>
 </body>
-
-
 </html>
