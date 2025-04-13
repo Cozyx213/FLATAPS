@@ -173,6 +173,6 @@ def Chemistry_data():
              'phrases':phrases.PHRASES()
             }
 
-#if __name__ == "__main__":
+if __name__ == "__main__":
 #Specify the host and port here
-#    app.run(host="192.168.1.2", port=5100)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
