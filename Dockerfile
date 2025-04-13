@@ -1,7 +1,7 @@
 # Use a lightweight official Python base image
 FROM python:3.11-slim
 
-# Set the working directory inside the container
+# Set the working directory inside the container 2
 WORKDIR /app
 
 # Copy your code and dependencies into the container
