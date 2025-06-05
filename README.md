@@ -1,6 +1,6 @@
 # FLATAPS Chemistry Flashcard App
 
-#### Video Demo: <URL HERE>
+#### Video Demo: https://youtu.be/pLfWu_dDv3A
 
 #### Description:
 
@@ -57,4 +57,6 @@ FLATAPS allows users to practice and test their knowledge of chemical elements, 
 
 ---
 
-FLATAPS is designed to make chemistry learning interactive, competitive, and fun. Whether you're a student, teacher, or enthusiast, this platform aims to support your educational journey with robust features and a user-friendly interface.
+FLATAPS is designed to make chemistry learning interactive, competitive, and fun. Whether you're a student, teacher, or enthusiast, this platform aims to support your educational journey with robust features and a user-friendly interface. Furthermore this app still has a ton of oppurtunities to be further enhanced. A native app could be usefull so that users can have the best user experiencec compared to just a website and wpa. 
+
+This was cs50.
