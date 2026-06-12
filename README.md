@@ -1,5 +1,5 @@
 # FLATAPS Chemistry Flashcard App
-
+#### Video Demo: https://youtu.be/pLfWu_dDv3A
 #### Description:
 
 FLATAPS (Flashcard Learning and Testing Application for Periodic System) is a web-based platform designed to help students and enthusiasts master chemistry concepts through interactive flashcards and a leaderboard system. Built using Python (Flask), JavaScript, SQLite, and styled with Tailwind CSS, the app provides a modern, engaging, and educational experience for users at all levels.
